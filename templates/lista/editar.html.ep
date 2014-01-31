@@ -17,10 +17,13 @@
       <ul>
     % foreach (@{$_->{produtos}}) {
 			% my %checked = ();
+			% my %exibir = (size => 10);
 			% if ($_->{selecionado}) {
 				% $checked{checked} = 'checked';
+			% } else {
+				% $exibir{style} = 'display:none';
 			% }
- 				<li><%= check_box produto => $_->{id}, %checked %><%= $_->{nome} %><%= text_field 'observacao_' . $_->id => $_->{observacao} %></li>
+ 				<li><label><%= check_box produto => $_->{id}, %checked %><%= $_->{nome} %></label><%= text_field 'observacao_' . $_->id => $_->{observacao}, %exibir %></li>
 		% }
       </ul>
     </li>
@@ -32,3 +35,18 @@
   % }
 
 % end
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $('input[name=produto]').bind('click', function () {
+      var opcao = $(this);
+      var texto = $('input[name=observacao_' + opcao.val() + ']');
+      if (opcao.prop('checked')) {
+        texto.show();
+      } else {
+        texto.hide();
+      }
+    });   
+  });
+</script>
+
