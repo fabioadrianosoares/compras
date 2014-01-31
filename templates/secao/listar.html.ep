@@ -1,0 +1,11 @@
+% layout 'default';
+%= link_to url_for('secao_editar') => begin %>Criar<br><% end
+% if (scalar @{$secoes}) {
+  <ul>
+  % foreach (@{$secoes}) {
+    <li><%= link_to $_->nome => url_for('secao_editar', id => $_->id) %></li>
+  % }
+  </ul>
+% } else {
+  %= tag h2 => begin %>Nenhuma seção cadastrada<% end
+% }

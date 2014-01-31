@@ -1,0 +1,24 @@
+% layout 'default';
+% if ($novo) {
+	% title 'Nova Seção';
+% } else {
+	% title 'Editar Seção';
+% }
+%= form_for secao_salvar => (method => 'post') => begin
+  Nome: <%= text_field 'nome', value => $secao->nome %><br>
+  %= hidden_field 'id' => $secao->id;
+  %= submit_button 'Salvar', name => 'salvar'
+  % unless ($novo) {
+    %= submit_button 'Excluir', name => 'excluir'
+  % }
+% end
+% unless ($novo) {
+  <hr width="100%">
+  <h2>Produtos</h2>
+  <%= link_to url_for('produto_editar', id => 0)->query(secao => $secao->id) => begin %>Criar<% end %><br>
+  <ul>
+  % foreach (@{$produtos}) {  
+    <li><td><%= link_to $_->nome => url_for('produto_editar', id => $_->id)->query(secao => $secao->id) %></li>
+  % }  
+  </ul>
+% }

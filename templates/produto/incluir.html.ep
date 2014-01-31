@@ -1,0 +1,3 @@
+% layout 'default';
+%= tag h2 => $mensagem
+Incluir novo? <%= link_to url_for('produto_editar', id => 0)->query(secao => $secao) => begin %>Sim<% end %>

@@ -1,0 +1,7 @@
+% foreach ($lista->secoes) {
+	% foreach (@{$_->{produtos}}) {
+		% if ($_->{selecionado}) {
+%== $_->nome . (defined($_->{observacao}) && $_->{observacao} ne '' ? ' - ' . $_->{observacao} : '')
+		% }
+	% }
+% }

@@ -1,0 +1,102 @@
+:: Laticínio
+Yakult
+Activia
+Margarina
+Manteiga
+Todynho
+Iogurte
+
+:: Limpeza
+Água sanitária
+Detergente
+Amaciante
+Sabão em pó
+Desinfetante
+Papel higiênico
+
+:: Bebidas
+Água com gás
+Cerveja
+Suco uva ML
+Suco uva fábio
+Coca-Cola
+Mini-Refrigerante
+
+:: Higiene
+Shampoo Fran
+Shampoo ML
+Shampoo Fabio
+Condicionador Fran
+Condicionador ML
+Condicionador Fabio
+Creme pentear ML
+Iodo
+TennisPé pó
+TennisPé spray
+Absorvente
+Sabonete
+Cotonete
+Creme dental
+
+:: Feira
+Ovo
+Maçã
+Cebola
+Tomate
+Batata inglesa
+Manga
+Laranja
+Abobora
+Alface
+Cenoura
+
+:: Enlatado
+Creme de leite
+Molho de tomate
+Ervilha
+Salsicha
+Feijoada
+
+:: Lanche
+Doritos
+Rufles
+Cebolitos
+Fandangos
+Bisnaga
+Batata palha
+Biscoito Maizena
+Club Social
+
+:: Frios
+Queijo
+Copa
+
+:: Mercearia
+Miojo
+Spagete
+Parafuso
+Sopa de letras
+Arroz
+Feijao Carioca
+Feijao Preto
+Oleo soja
+Azeite
+Sal
+Açucar
+Preparo para Pudim
+Papel toalha
+
+:: Congelado
+Pão de queijo
+Frango empanado
+Hambúrguer pronto
+
+:: Açougue
+Linguiça fininha
+Calabresa
+Carne Moida
+Carne Cubo
+Carne Bife
+Coxa
+Bacon
+Coração

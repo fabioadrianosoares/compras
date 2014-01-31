@@ -1,0 +1,5 @@
+% layout 'default';
+% title 'Excluir';
+Confirma exclusão do produto '<b><%= $nome %></b>'?<br>
+<%= link_to url_for('produto_editar', id => $id) => begin %>Não<% end %>&nbsp;
+<%= link_to url_for('produto_excluir', id => $id) => begin %>Sim<% end %>&nbsp;

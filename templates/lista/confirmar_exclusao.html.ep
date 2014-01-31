@@ -1,0 +1,5 @@
+% layout 'default';
+% title 'Excluir';
+Confirma exclusão da lista '<b><%= $nome %></b>'?<br>
+<%= link_to url_for('lista_editar', id => $id) => begin %>Não<% end %>&nbsp;
+<%= link_to url_for('lista_excluir', id => $id) => begin %>Sim<% end %>&nbsp;

@@ -1,0 +1,18 @@
+% layout 'default';
+%= link_to url_for('produto_editar') => begin %>Criar<br><% end
+% if (scalar @{$secoes}) {
+  <ul>
+  % foreach (@{$secoes}) {
+		% next unless (scalar @{$_->{produtos}});
+    <li><%= link_to $_->nome => url_for('secao_editar', id => $_->id) %>
+      <ul>
+    % foreach (@{$_->{produtos}}) {    
+        <li><%= link_to $_->nome => url_for('produto_editar', id => $_->id) %></li>
+		% }
+      </ul>
+    </li>
+	% }
+  </ul>
+% } else {
+  %= tag h2 => begin %>Nenhum produto cadastrado<% end
+% }

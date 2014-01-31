@@ -1,0 +1,34 @@
+% layout 'default';
+% if ($novo) {
+	% title 'Nova Lista';
+% } else {
+	% title 'Editar Lista';
+	%= link_to Copiar => url_for('lista_copiar', id => $lista->id)
+	%= link_to Exportar => url_for('lista_exportar', id => $lista->id)
+% }
+%= form_for lista_salvar => (method => 'post') => begin
+  Nome: <%= text_field 'nome', value => $lista->nome %><br>
+  Data: <%= data_visual $lista->data %><br>
+  %= hidden_field 'id' => ($copiar ? '' : $lista->id);
+  <ul>
+  % foreach ($lista->secoes) {
+		% next unless (scalar @{$_->{produtos}});
+    <li><%= $_->nome %>
+      <ul>
+    % foreach (@{$_->{produtos}}) {
+			% my %checked = ();
+			% if ($_->{selecionado}) {
+				% $checked{checked} = 'checked';
+			% }
+ 				<li><%= check_box produto => $_->{id}, %checked %><%= $_->{nome} %><%= text_field 'observacao_' . $_->id => $_->{observacao} %></li>
+		% }
+      </ul>
+    </li>
+	% }
+  </ul>  
+  %= submit_button 'Salvar', name => 'salvar'
+  % unless ($novo) {
+    %= submit_button 'Excluir', name => 'excluir'
+  % }
+
+% end

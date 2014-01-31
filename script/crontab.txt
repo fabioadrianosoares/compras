@@ -1,0 +1,2 @@
+*/5 * * * * /home/fabio/sites/compras/script/heartbeat.sh > /dev/null 2>&1 
+3 0 * * * /home/fabio/sites/compras/script/heartbeat.sh parar > /dev/null 2>&1

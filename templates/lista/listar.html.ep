@@ -1,0 +1,12 @@
+% layout 'default';
+%= link_to url_for('lista_editar') => begin %>Criar<br><% end
+% if (scalar @{$listas}) {
+  <ul>
+  % foreach (@{$listas}) {
+    % my $texto = $_->data_dmy . ' - ' . $_->nome;
+    <li><%= link_to $texto => url_for('lista_editar', id => $_->id) %></li>
+  % }
+  </ul>
+% } else {
+  %= tag h2 => begin %>Nenhuma lista cadastrada<% end
+% }

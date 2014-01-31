@@ -1,0 +1,2 @@
+% layout 'default';
+%= tag h2 => $mensagem

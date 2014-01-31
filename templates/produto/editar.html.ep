@@ -1,0 +1,20 @@
+% layout 'default';
+% if ($novo) {
+	% title 'Novo Produto';
+% } else {
+	% title 'Editar Produto';
+% }
+%= form_for produto_salvar => (method => 'post') => begin
+  Seção: <select name="secao">
+  % foreach (@{$secoes}) {
+    <option value="<%= $_->id %>"<%= $_->id == $produto->secao ? ' selected' : '' %>><%= $_->nome %></option>
+  % }
+  </select><br>
+  Nome: <%= text_field 'nome', value => $produto->nome %><br>
+  %= hidden_field 'id' => $produto->id;
+  %= submit_button 'Salvar', name => 'salvar'
+  % unless ($novo) {
+    %= submit_button 'Excluir', name => 'excluir'
+  % }
+% end
+
