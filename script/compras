@@ -1,9 +1,13 @@
 use strict;
 use warnings;
 
-use lib 'lib';
+use File::Basename 'dirname';
+use File::Spec;
+
+use lib join('/', File::Spec->splitdir(dirname(__FILE__)), '..', 'lib');
 
 $ENV{CAMINHO_BANCO} ||= '/home/fabio/desenvolvimento/compras.lab4/db/banco.db';
+$ENV{MOJO_MODE} ||= 'production';
 
 # Start command line interface for application
 require Mojolicious::Commands;
