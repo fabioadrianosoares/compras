@@ -7,7 +7,7 @@ use utf8;
 sub startup {
   my $self = shift;
   
-  $self->secret('em buraco de tatu');
+  $self->secrets('em buraco de tatu');
   
 	if (($ENV{MOJO_MODE} // '') ne 'production') {
 		# Documentation browser under "/perldoc"

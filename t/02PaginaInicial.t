@@ -8,7 +8,7 @@ use utf8;
 use_ok 'Compras';
 
 my $t = Test::Mojo->new('Compras');
-$t->get_ok('/compras')->status_is(200)->text_is('html head title' => 'Lista de compras', 'Titulo');
+$t->get_ok('/compras')->status_is(200)->text_is('html head title' => 'Lista de Compras', 'Titulo');
 
 # validar existencia dos links do menu
 $t->text_is('html body a[href="/compras/secao"]' => 'Seção', 'Link para secoes');

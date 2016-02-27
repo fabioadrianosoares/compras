@@ -13,14 +13,14 @@ use_ok 'Compras';
 sub ParseListaProdutos {
 	my $dom = shift;
 	my @retorno = ();
-	$dom->find('html > body > form > ul > li')->each(sub {
+	$dom->find('html > body > section > form > ul > li')->each(sub {
 		$_->find('ul > li')->each(sub {
-			my $nome = $_->text;
+			my $nome = $_->all_text;
 			my $produto = $_->at('input[name="produto"]');
 			if ($produto && $_->children->size == 2) {
-				my $id = $produto->attrs('value');
-				my $checked = $produto->attrs('checked') ? 1 : 0;
-				my $observacao = $_->at('input[name="observacao_' . $id . '"]')->attrs('value');
+				my $id = $produto->attr('value');
+				my $checked = $produto->attr('checked') ? 1 : 0;
+				my $observacao = $_->at('input[name="observacao_' . $id . '"]')->attr('value');
 				push @retorno, {id => $id,
 					nome => $nome,
 					checked => $checked,
@@ -35,11 +35,11 @@ sub ParseListaProdutos {
 sub ParseListaListas {
 	my $dom = shift;
 	my @retorno = ();
-	$dom->find('html > body > ul > li > a')->each(sub {
-		if ($_->attrs('href') =~ m|/lista/editar/(\d+)|) {
+	$dom->find('html > body > section > ul > li > a')->each(sub {
+		if ($_->attr('href') =~ m|/lista/editar/(\d+)|) {
 			push @retorno, {id => $1,
 				nome => substr($_->text, 13),
-				link => $_->attrs('href')};
+				link => $_->attr('href')};
 		}
 	});
 	return @retorno;
@@ -61,7 +61,7 @@ my $dados = {id => '',
 
 map {$dados->{'observacao_' . $_} = 'Obs ' . $_} @produtos_sel[1..2];
 
-$t->post_form_ok('/compras/lista/salvar' => $dados);
+$t->post_ok('/compras/lista/salvar' => form => $dados);
 $t->status_is(200)->content_like(qr/Registro incluido/, 'Confirmar Primeira Lista');
 
 $t->get_ok('/compras/lista')->status_is(200);
@@ -132,7 +132,7 @@ $dados = {id => $id_lista_dummy,
 
 map {$dados->{'observacao_' . $_} = 'Obs ' . $_} @produtos_sel[1..2];
 
-$t->post_form_ok('/compras/lista/salvar' => $dados);
+$t->post_ok('/compras/lista/salvar' => form => $dados);
 $t->status_is(200)->content_like(qr/Registro atualizado/, 'Confirmar alterar Lista');
 
 $t->get_ok('/compras/lista')->status_is(200);
@@ -190,13 +190,13 @@ $t->get_ok("/compras/lista/editar/$id_lista_dummy")->status_is(200)->text_is('ht
 
 my $copiar = $t->tx->res->dom('html body a')->first(sub {
 		$_->text eq 'Copiar';
-	})->attrs('href');
+	})->attr('href');
 
 ok $copiar, 'Link para copiar';
 
 $t->get_ok($copiar)->status_is(200)->text_is('html body h1' => 'Nova Lista', 'Formulario para copia');
 	
-is $t->tx->res->dom('form input[name="id"]')->first->attrs('value'), '', 'Id em branco';
+is $t->tx->res->dom('form input[name="id"]')->first->attr('value'), '', 'Id em branco';
 
 @produtos = ParseListaProdutos($t->tx->res->dom);
 
@@ -241,7 +241,7 @@ $t->get_ok("/compras/lista/editar/$id_lista_dummy")->status_is(200);
 
 my $exportar = $t->tx->res->dom('html body a')->first(sub {
 		$_->text eq 'Exportar';
-	})->attrs('href');
+	})->attr('href');
 
 ok $exportar, 'Link para exportar';
 
@@ -280,17 +280,17 @@ if ($t->tx->res->headers->content_disposition =~ /filename="([^"]+)"/) {
 ## excluir lista
 $t->get_ok("/compras/lista/editar/$id_lista_dummy")->status_is(200)->text_is('html body h1' => 'Editar Lista', 'Formulario de Edicao');
 
-$dados = {id => $t->tx->res->dom('form input[name="id"]')->first->attrs('value'),
-	nome => $t->tx->res->dom('form input[name="nome"]')->first->attrs('value'),
+$dados = {id => $t->tx->res->dom('form input[name="id"]')->first->attr('value'),
+	nome => $t->tx->res->dom('form input[name="nome"]')->first->attr('value'),
 	excluir => 'excluir'
 	};
 
-$t->post_form_ok('/compras/lista/salvar' => $dados);
+$t->post_ok('/compras/lista/salvar' => form => $dados);
 
 $t->status_is(200)->content_like(qr/Confirma exclusão da lista/, 'Confirmacao do usuario para excluir lista');
 
 my $exclusao = $t->tx->res->dom('html body a')->first(sub {
 		$_->text eq 'Sim';
-	})->attrs('href');
+	})->attr('href');
 
 $t->get_ok($exclusao)->status_is(200)->content_like(qr/Registro excluido/, 'Confirmar Primeira exclusao');

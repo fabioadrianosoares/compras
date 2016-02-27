@@ -82,9 +82,9 @@ sub salvar {
   }
   
   Compras::Model::ItemLista->delete_where('lista = ?', $lista->id);
-  
-  foreach my $produto ($self->param('produto')) {
-    my $observacao = $self->param('observacao_' . $produto);
+
+  foreach my $produto (@{$self->every_param('produto')}) {
+    my $observacao = $self->param('observacao_' . $produto) || '';
     utf8::decode($observacao);
     Compras::Model::ItemLista->create(
       lista => $lista->id,
